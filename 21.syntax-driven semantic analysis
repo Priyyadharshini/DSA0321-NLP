@@ -1,0 +1,14 @@
+import spacy
+nlp = spacy.load("en_core_web_sm")
+meanings_dict = {
+    "an apple": "a fruit",
+    "the car": "a vehicle",
+    "the dog": "a pet animal",
+    "a book": "a set of pages",
+    "phone": "a communication device"
+}
+def get_noun_phrases_meanings(sentence):
+    doc = nlp(sentence)
+    return {np.text: meanings_dict.get(np.text.lower(), "Meaning not found") for np in doc.noun_chunks}
+sentence = "The dog chased the car, and I found a book about an apple."
+print(get_noun_phrases_meanings(sentence))
