@@ -1,0 +1,27 @@
+import nltk
+grammar = nltk.CFG.fromstring("""
+    S -> NP VP
+    NP -> Det N | Det Adj N | Pronoun
+    VP -> Vsing NP | Vplural NP
+    Det -> 'the' | 'a'
+    N -> 'cat' | 'dog' | 'apple' | 'cats' | 'dogs' | 'apples'
+    Adj -> 'big' | 'small'
+    Pronoun -> 'he' | 'she' | 'they'
+    Vsing -> 'eats' | 'sees' | 'runs'
+    Vplural -> 'eat' | 'see' | 'run'
+""")
+parser = nltk.ChartParser(grammar)
+def check_sentence(sentence):
+    tokens = nltk.word_tokenize(sentence.lower())
+    try:
+        parse_tree = list(parser.parse(tokens))
+        if parse_tree:
+            print(f"The sentence '{sentence}' is grammatically correct!")
+            for tree in parse_tree:
+                tree.pretty_print()
+        else:
+            print(f"The sentence '{sentence}' does not match the grammar.")
+    except ValueError as e:
+        print(f"The sentence '{sentence}' does not match the grammar.")
+sentence = "The cat eats the apple"
+check_sentence(sentence)
