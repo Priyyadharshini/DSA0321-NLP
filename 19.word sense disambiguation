@@ -1,0 +1,9 @@
+import nltk
+from nltk.wsd import lesk
+from nltk.corpus import wordnet as wn
+context = "I had bass for lunch"
+sense = lesk(context.split(), 'bass')
+if sense:
+  print(sense.name(), sense.definition())
+else:
+  print("No sense found.")
