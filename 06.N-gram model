@@ -1,0 +1,21 @@
+import random
+import nltk
+from collections import defaultdict
+nltk.download('punkt')
+text="I love Programming. Programming is fun and rewarding."
+words=nltk.word_tokenize(text)
+bigrams=list(nltk.bigrams(words))
+model=defaultdict(list)
+for w1,w2 in bigrams:
+  model[w1].append(w2)
+def generate_text(start_word,length):
+  result=[start_word]
+  for _ in range(length-1):
+    next_words=model.get(result[-1])
+    if next_words:
+      next_word=random.choice(next_words)
+      result.append(next_word)
+    else:
+      break
+  return ' '.join(result)
+print(generate_text("Programming",6))
