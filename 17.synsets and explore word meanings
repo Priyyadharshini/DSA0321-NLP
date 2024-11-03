@@ -1,0 +1,38 @@
+import nltk
+from nltk.corpus import wordnet as wn
+nltk.download('wordnet')
+word = 'happy'
+synsets = wn.synsets(word)
+for synset in synsets:
+    print(f"Synset: {synset.name()}")
+    print(f"Definition: {synset.definition()}")
+    print(f"Examples: {synset.examples()}")
+    print()
+synset = wn.synset('joyful.a.01')
+hypernyms = synset.hypernyms()
+if hypernyms:
+    hypernym = hypernyms[0]
+    print(f"Hypernym: {hypernym.name()}")
+else:
+    print(f"No hypernym found for '{synset.name()}'.")
+hyponym = wn.synset('canine.a.02')
+hyponyms = hyponym.hyponyms()
+if hyponyms:
+    hyponym_of = hyponyms[0]
+    print(f"Hyponym: {hyponym_of.name()}")
+else:
+    print(f"No hyponym found for '{hyponym.name()}'.")
+meronym = wn.synset('car.n.01')
+part_meronyms = meronym.part_meronyms()
+if part_meronyms:
+    meronym_of = part_meronyms[0]
+    print(f"Part Meronym: {meronym_of.name()}")
+else:
+    print(f"No part meronym found for '{meronym.name()}'.")
+holonym = wn.synset('hand.n.01')
+member_holonyms = holonym.member_holonyms()
+if member_holonyms:
+    holonym_of = member_holonyms[0]
+    print(f"Member Holonym: {holonym_of.name()}")
+else:
+    print(f"No member holonym found for '{holonym.name()}'.")
