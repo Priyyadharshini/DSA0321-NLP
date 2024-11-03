@@ -1,0 +1,6 @@
+import nltk
+from nltk.stem import PorterStemmer
+nltk.download('punkt')
+stemmer = PorterStemmer()
+words = ["running", "jumping", "happiness", "computers", "generous"]
+stemmed_words = [stemmer.s
